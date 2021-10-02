@@ -1,22 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useAuth0 } from "@auth0/auth0-react";
+
+import { LoginButton } from "./componentes/Login";
+import { LogoutButton } from "./componentes/Logout";
+import { Profile } from "./componentes/Profile";
+import logo from "./logo.svg";
+import "./App.css";
+import RegistroUsuario from "./componentes/RegistroUsuario";
 
 function App() {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        {isAuthenticated ? (
+          <>
+          <RegistroUsuario/>
+            {/* <Profile /> */}
+            <LogoutButton />
+          </>
+        ) : (
+          <LoginButton />
+        )}
       </header>
     </div>
   );
